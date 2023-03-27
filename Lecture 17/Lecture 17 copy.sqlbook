@@ -99,9 +99,26 @@ Try it yourself!
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
 
+INSERT INTO drivers VALUES (6, 'Ben Zamler', 'American', 23);
 
+INSERT INTO drivers VALUES (7, 'Turner Goetsch', 'American', 69);
 
+INSERT INTO drivers VALUES (8, 'Evan Woska', 'American', 78);
 
+INSERT INTO drivers VALUES (9, 'Jack Petkash', 'Skank', 0);
+
+INSERT INTO drivers VALUES (10, 'Justin Whitney', 'Estrogenian', 0);
+
+INSERT INTO drivers VALUES (11, 'Sophia Arruda', 'Mysoginist', 3);
+
+INSERT INTO drivers VALUES (12, 'Ellie Long', 'Icon', 400);
+
+INSERT INTO drivers VALUES (13, 'Patrick Latting', 'NPCian', 1);
+
+INSERT INTO drivers VALUES (14, 'Alejandro Sanchez ', 'Columbian', 21);
+
+-- Always be careful when using the single quotations
+-- Also need to include a semicolon
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
 
@@ -120,6 +137,7 @@ SELECT driver_id nationality FROM drivers;
 Extract all columns from table
 -- SQLBook: Code
 -- The symbol "*" is a shorthand for "all variables"
+-- Select *All of the columns* from drivers. That's what the star means
 SELECT * FROM drivers;
 -- SQLBook: Markup
 <font size = "5">
@@ -127,12 +145,13 @@ SELECT * FROM drivers;
 Subsetting rows
 -- SQLBook: Code
 -- The WHERE command evaluates logical conditions to subset rows
+-- 
 SELECT * FROM drivers
 WHERE nationality = 'German';
 
 -- Evalute OR conditions
 SELECT * FROM drivers
-WHERE (nationality = 'German') OR (nationality = 'British');
+WHERE (nationality = 'American') OR (nationality = 'Skank');
 
 -- Evaluate AND conditions
 SELECT * FROM drivers
@@ -145,7 +164,7 @@ Aggregate
 -- SQLBook: Code
 -- To compute aggregate statistics use a statistic function,
 -- such as SUM() or AVG() 
--- The AS is an alias which assigns a name to the aggregate statistic
+-- The AS is an alias which assigns a name to the aggregate statistic (essentially name the column)
 
 SELECT COUNT(*) AS num_rows,
        SUM(victories) AS sum_victories,
@@ -188,8 +207,8 @@ with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
 
-
-
+SELECT nationality, driver_id FROM drivers
+WHERE victories > 60;
 
 
 -- SQLBook: Markup
@@ -241,9 +260,9 @@ SELECT nationality,
        MIN(victories) AS min_victories,
        MAX(victories) AS max_victories
 FROM drivers
-WHERE nationality = 'German'
+WHERE (nationality = 'German') OR (nationality = 'Spanish')
 GROUP BY nationality
-HAVING SUM(victories) > 50;
+HAVING SUM(victories) > 0;
 -- SQLBook: Markup
 # <span style="color:darkblue"> IV. Learning more </span>
 
