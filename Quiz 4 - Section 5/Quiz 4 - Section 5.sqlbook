@@ -6,7 +6,8 @@
 <font size = "5">
 Write your name as a comment (use double dash)
 -- SQLBook: Code
-
+SELECT 'Ben Zamler' AS MyName;
+-- Ben Zamler
 -- SQLBook: Markup
 <font size = "5" >
 This quiz is open book 
@@ -21,7 +22,7 @@ Write the following message as a comment: <br>
 "I will abide by Emory's code of conduct"
 
 -- SQLBook: Code
-
+-- I will abide by Emory's code of conduct
 -- SQLBook: Markup
 
 <font size = "5">
@@ -40,7 +41,20 @@ the image and following the instructions in Lecture 18.
 HINT: Include any column names with upper case in doube quotations, <br> e.g.
 "raceId". If you don't you'll get an error
 -- SQLBook: Code
+
+-- SQLBook: Code
 -- Write your own code
+DROP TABLE IF EXISTS driver_standings;
+CREATE TABLE driver_standings(
+    driverStandingsId int,
+    raceId int, 
+    driverid int,
+    points float,
+    position int,
+    
+
+)
+
 
 
 
