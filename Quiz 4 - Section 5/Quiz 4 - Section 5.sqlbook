@@ -46,14 +46,14 @@ HINT: Include any column names with upper case in doube quotations, <br> e.g.
 -- Write your own code
 DROP TABLE IF EXISTS driver_standings;
 CREATE TABLE driver_standings(
-    driverStandingsId int,
-    raceId int, 
-    driverid int,
+    "driverStandingsId" int,
+    "raceId" int, 
+    "driverId" int,
     points float,
     position int,
-    
-
-)
+    "positionText" varchar(255),
+    wins int
+);
 
 
 
@@ -76,10 +76,14 @@ lectures for how to handle the permissions. <br>
 you are running and add a comment that you used the terminal
 -- SQLBook: Code
 -- Write your own code
+COPY driver_standings
+FROM '/private/tmp/Quiz 4 - Section 5/data_raw/driver_standings.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH); 
 
+--Used terminal, but I don't think data imported
 
-
-
+-- SQLBook: Code
+SELECT * FROM driver_standings
 -- SQLBook: Markup
 <font size = "5">
 
@@ -98,7 +102,9 @@ least one capital letter with double quotations, e.g. "driverId" <br>
 HINT: See Lecture 17
 -- SQLBook: Code
 -- Write your own code
-
+SELECT * FROM driver_standings
+WHERE (position = 1) OR (position = 2) OR (position = 3) OR (position = 4) OR (position = 5) OR (position = 6) OR (position = 7)
+ORDER BY points DESC;
 
 
 
@@ -118,7 +124,11 @@ HINT: See the end of lectures 17
 -- SQLBook: Code
 -- Write your own code
 
-
+SELECT "raceId",
+       SUM(wins) AS sum_wins,
+       AVG(wins) AS mean_wins
+FROM driver_standings
+GROUP BY "raceId";
 
 
 
@@ -140,8 +150,14 @@ quotations it includes a mix of lower case and upper case letters
 -- SQLBook: Code
 -- Write your own code
 
+SELECT "driverId",
+       COUNT("driverId") AS num_driverId
+FROM driver_standings
+GROUP BY "driverId"
+ORDER BY num_driverId DESC;
 
 
+--Ok but it literally does exist
 -- SQLBook: Markup
 
 <font size = "5">
@@ -156,6 +172,11 @@ number of rows by "driverId" ```GROUP BY``` <br>
  using ```HAVING ```
 -- SQLBook: Code
 -- Write your own code
+SELECT "driverId",
+       COUNT("driverId") AS count_victories
+FROM driver_standings
+GROUP BY "driverId"
+HAVING SUM("driverId") < 250;
 
 
 

@@ -44,7 +44,7 @@ CREATE TABLE results(
 );
 
 COPY results
-FROM '/private/tmp/lap_times.csv'
+FROM '/private/tmp/Assignment 8/data_raw/lap_times.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH); 
 
 
@@ -104,7 +104,9 @@ Hints:
 
 -- SQLBook: Code
 -- Write your own code
-
+SELECT * FROM drivers
+WHERE nationality = 'American'
+ORDER BY surname ASC;
 
 
 -- SQLBook: Markup
@@ -122,7 +124,9 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
-
+SELECT COUNT(DISTINCT "driverId") AS num_driverId,
+       COUNT(*) AS num_driverID       
+FROM drivers
 
 
 -- SQLBook: Markup
@@ -141,6 +145,11 @@ upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
 
+SELECT "driverId",
+       AVG(milliseconds) AS average_milliseconds
+FROM results
+GROUP BY "driverId"
+ORDER BY average_milliseconds DESC;
 
 
 -- SQLBook: Markup
@@ -159,5 +168,8 @@ HINT: Include "driverId" in quotations since it has a mix of <br>
 upper case and lower case letters
 -- SQLBook: Code
 -- Write your own code
-
+SELECT * 
+FROM results
+LEFT JOIN drivers
+ON results."driverId"  = drivers."driverId";
 
